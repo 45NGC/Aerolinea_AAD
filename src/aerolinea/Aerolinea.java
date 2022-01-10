@@ -33,10 +33,13 @@ public class Aerolinea extends javax.swing.JFrame {
 
         contenedor = new javax.swing.JTabbedPane();
         infoGeneral = new javax.swing.JPanel();
+        actualizarTablaVuelos = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaVuelos = new javax.swing.JTable();
         infoPasajeros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        actualizarTabla = new javax.swing.JButton();
+        tablaPasajeros = new javax.swing.JTable();
+        actualizarTablaPasajeros = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -66,20 +69,15 @@ public class Aerolinea extends javax.swing.JFrame {
 
         contenedor.setName(""); // NOI18N
 
-        javax.swing.GroupLayout infoGeneralLayout = new javax.swing.GroupLayout(infoGeneral);
-        infoGeneral.setLayout(infoGeneralLayout);
-        infoGeneralLayout.setHorizontalGroup(
-            infoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
-        );
-        infoGeneralLayout.setVerticalGroup(
-            infoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 604, Short.MAX_VALUE)
-        );
+        actualizarTablaVuelos.setText("Actualizar tabla");
+        actualizarTablaVuelos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        actualizarTablaVuelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarTablaVuelosActionPerformed(evt);
+            }
+        });
 
-        contenedor.addTab("infoGeneral", infoGeneral);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -102,44 +100,36 @@ public class Aerolinea extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(30);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(250);
+        jScrollPane3.setViewportView(tablaVuelos);
+        if (tablaVuelos.getColumnModel().getColumnCount() > 0) {
+            tablaVuelos.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tablaVuelos.getColumnModel().getColumn(3).setPreferredWidth(30);
+            tablaVuelos.getColumnModel().getColumn(4).setPreferredWidth(30);
+            tablaVuelos.getColumnModel().getColumn(5).setPreferredWidth(250);
         }
 
-        actualizarTabla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        actualizarTabla.setText("Actualizar tabla");
-        actualizarTabla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarTablaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout infoPasajerosLayout = new javax.swing.GroupLayout(infoPasajeros);
-        infoPasajeros.setLayout(infoPasajerosLayout);
-        infoPasajerosLayout.setHorizontalGroup(
-            infoPasajerosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
-            .addGroup(infoPasajerosLayout.createSequentialGroup()
-                .addGap(318, 318, 318)
-                .addComponent(actualizarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout infoGeneralLayout = new javax.swing.GroupLayout(infoGeneral);
+        infoGeneral.setLayout(infoGeneralLayout);
+        infoGeneralLayout.setHorizontalGroup(
+            infoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, infoGeneralLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(actualizarTablaVuelos, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(318, 318, 318))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
         );
-        infoPasajerosLayout.setVerticalGroup(
-            infoPasajerosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(infoPasajerosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(actualizarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+        infoGeneralLayout.setVerticalGroup(
+            infoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, infoGeneralLayout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(actualizarTablaVuelos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        contenedor.addTab("infoPasajeros", infoPasajeros);
+        contenedor.addTab("infoVuelos", infoGeneral);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPasajeros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -152,6 +142,66 @@ public class Aerolinea extends javax.swing.JFrame {
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaPasajeros);
+        if (tablaPasajeros.getColumnModel().getColumnCount() > 0) {
+            tablaPasajeros.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tablaPasajeros.getColumnModel().getColumn(3).setPreferredWidth(30);
+            tablaPasajeros.getColumnModel().getColumn(4).setPreferredWidth(30);
+            tablaPasajeros.getColumnModel().getColumn(5).setPreferredWidth(250);
+        }
+
+        actualizarTablaPasajeros.setText("Actualizar tabla");
+        actualizarTablaPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        actualizarTablaPasajeros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarTablaPasajerosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout infoPasajerosLayout = new javax.swing.GroupLayout(infoPasajeros);
+        infoPasajeros.setLayout(infoPasajerosLayout);
+        infoPasajerosLayout.setHorizontalGroup(
+            infoPasajerosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+            .addGroup(infoPasajerosLayout.createSequentialGroup()
+                .addGap(318, 318, 318)
+                .addComponent(actualizarTablaPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        infoPasajerosLayout.setVerticalGroup(
+            infoPasajerosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infoPasajerosLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(actualizarTablaPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        contenedor.addTab("infoPasajeros", infoPasajeros);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Id_avion", "Origen", "Destino", "Fecha salida", "Fecha llegada", "Distancia", "Fumadores", "Activo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -164,14 +214,11 @@ public class Aerolinea extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jTable2.getColumnModel().getColumn(3).setPreferredWidth(30);
-            jTable2.getColumnModel().getColumn(4).setPreferredWidth(30);
-            jTable2.getColumnModel().getColumn(5).setPreferredWidth(250);
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        mostrarPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mostrarPasajeros.setText("Mostrar pasajeros");
+        mostrarPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mostrarPasajeros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarPasajerosActionPerformed(evt);
@@ -181,8 +228,8 @@ public class Aerolinea extends javax.swing.JFrame {
         numeroVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         numeroVuelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Número de vuelo:");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -215,42 +262,42 @@ public class Aerolinea extends javax.swing.JFrame {
 
         idAvion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Id avión");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Origen");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         origen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Destino");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         destino.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Fecha salida");
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Fecha llegada");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         distancia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Distancia");
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Fumadores");
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        insertarVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         insertarVuelo.setText("Insertar vuelo");
+        insertarVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         fechaLlegada.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         fechaSalida.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -379,20 +426,54 @@ public class Aerolinea extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void actualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarTablaActionPerformed
-        meterDatosEnTabla();
-    }//GEN-LAST:event_actualizarTablaActionPerformed
+    private void actualizarTablaPasajerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarTablaPasajerosActionPerformed
+        mostrarDatosEnTablaPasajeros();
+    }//GEN-LAST:event_actualizarTablaPasajerosActionPerformed
 
     private void mostrarPasajerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarPasajerosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mostrarPasajerosActionPerformed
 
-    private void meterDatosEnTabla() {
+    private void actualizarTablaVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarTablaVuelosActionPerformed
+        mostrarDatosEnTablaVuelos();
+    }//GEN-LAST:event_actualizarTablaVuelosActionPerformed
+
+    private void mostrarDatosEnTablaVuelos() {
+        try {
+            connDB.cargaDatosVuelos();
+            ResultSet rs = connDB.getRs();
+
+            DefaultTableModel model = (DefaultTableModel) tablaVuelos.getModel();
+            
+            // Borro la tabla porque si no se repiten los datos cada vez que
+            // presiono el botón
+            model.setRowCount(0);
+            
+            // Meto los datos de la base de datos en la tabla
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String id_avion = rs.getString("id_avion");
+                String origen = rs.getString("origen");
+                String destino = rs.getString("destino");
+                String fecha_salida = rs.getString("fecha_salida");
+                String fecha_llegada = rs.getString("fecha_llegada");
+                String distancia = rs.getString("distancia");
+                String fumadores = rs.getString("fumadores");
+                String activo = rs.getString("activo");
+                String[] data = {id, id_avion, origen, destino, fecha_salida, fecha_llegada, distancia, fumadores, activo};
+                model.addRow(data);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void mostrarDatosEnTablaPasajeros() {
         try {
             connDB.cargaDatosPasajeros();
             ResultSet rs = connDB.getRs();
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) tablaPasajeros.getModel();
             
             // Borro la tabla porque si no se repiten los datos cada vez que
             // presiono el botón
@@ -450,7 +531,8 @@ public class Aerolinea extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton actualizarTabla;
+    private javax.swing.JButton actualizarTablaPasajeros;
+    private javax.swing.JButton actualizarTablaVuelos;
     private javax.swing.JTabbedPane contenedor;
     private javax.swing.JTextField destino;
     private javax.swing.JTextField distancia;
@@ -475,10 +557,12 @@ public class Aerolinea extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
     private javax.swing.JButton mostrarPasajeros;
     private javax.swing.JTextField numeroVuelo;
     private javax.swing.JTextField origen;
+    private javax.swing.JTable tablaPasajeros;
+    private javax.swing.JTable tablaVuelos;
     // End of variables declaration//GEN-END:variables
 }
