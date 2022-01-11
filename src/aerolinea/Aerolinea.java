@@ -82,14 +82,14 @@ public class Aerolinea extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Dni", "Nombre", "Apellido", "Tlfn", "Tlfn Opcional", "Email"
+                "Id", "Id avion", "Origen", "Destino", "Fecha salida", "Fecha llegada", "Distancia", "Fumadores", "Activo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -101,12 +101,6 @@ public class Aerolinea extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(tablaVuelos);
-        if (tablaVuelos.getColumnModel().getColumnCount() > 0) {
-            tablaVuelos.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tablaVuelos.getColumnModel().getColumn(3).setPreferredWidth(30);
-            tablaVuelos.getColumnModel().getColumn(4).setPreferredWidth(30);
-            tablaVuelos.getColumnModel().getColumn(5).setPreferredWidth(250);
-        }
 
         javax.swing.GroupLayout infoGeneralLayout = new javax.swing.GroupLayout(infoGeneral);
         infoGeneral.setLayout(infoGeneralLayout);
@@ -228,7 +222,7 @@ public class Aerolinea extends javax.swing.JFrame {
         numeroVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         numeroVuelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        jLabel1.setText("Número de vuelo:");
+        jLabel1.setText("Id de vuelo:");
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -237,9 +231,9 @@ public class Aerolinea extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(107, 107, 107)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(numeroVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(mostrarPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
