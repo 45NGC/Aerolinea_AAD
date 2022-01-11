@@ -432,6 +432,20 @@ public class Aerolinea extends javax.swing.JFrame {
         mostrarDatosEnTablaVuelos();
     }//GEN-LAST:event_actualizarTablaVuelosActionPerformed
 
+    private void insertarVueloActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        formatearFecha();
+        System.out.println(formatearFecha());
+    }                                             
+
+    private String formatearFecha(){
+        // Obtener fecha y hora
+        String fecha, hora;
+        fecha = fechaLlegada.getDatePicker().toString();
+        hora = fechaLlegada.getTimePicker().toString();        
+        
+        return fecha+" "+hora;
+    }
+    
     private void mostrarDatosEnTablaVuelos() {
         try {
             connDB.cargaDatosVuelos();
