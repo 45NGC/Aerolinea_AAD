@@ -34,7 +34,7 @@ public class ConnDB {
     public ResultSet getRs() {
         return rs;
     }
-    
+
     public void cargaDatosVuelos() {
         Statement stmt = null;
         String query = "SELECT * FROM vuelos";
@@ -45,10 +45,24 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void cargaDatosPasajeros() {
         Statement stmt = null;
         String query = "SELECT * FROM pasajeros";
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void cargaDatosPasajerosVuelos(int idVuelo) {
+        Statement stmt = null;
+        String query = "SELECT * FROM pasajeros, billetes, vuelos " +
+                       "WHERE pasajeros.dni = billetes.dni_pasajero " +
+                       "AND billetes.id_vuelo = vuelos.id " +
+                       "AND vuelos.id = " + idVuelo;
         try {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);

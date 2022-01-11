@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,9 +43,9 @@ public class Aerolinea extends javax.swing.JFrame {
         actualizarTablaPasajeros = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaPasajerosVuelos = new javax.swing.JTable();
         mostrarPasajeros = new javax.swing.JButton();
-        numeroVuelo = new javax.swing.JTextField();
+        idVuelo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         idAvion = new javax.swing.JTextField();
@@ -183,19 +184,19 @@ public class Aerolinea extends javax.swing.JFrame {
 
         contenedor.addTab("infoPasajeros", infoPasajeros);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPasajerosVuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Id_avion", "Origen", "Destino", "Fecha salida", "Fecha llegada", "Distancia", "Fumadores", "Activo"
+                "Dni", "Nombre", "Apellido", "Telefono", "Telefono opcional", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true, true
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -206,9 +207,9 @@ public class Aerolinea extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane2.setViewportView(tablaPasajerosVuelos);
+        if (tablaPasajerosVuelos.getColumnModel().getColumnCount() > 0) {
+            tablaPasajerosVuelos.getColumnModel().getColumn(0).setResizable(false);
         }
 
         mostrarPasajeros.setText("Mostrar pasajeros");
@@ -219,8 +220,8 @@ public class Aerolinea extends javax.swing.JFrame {
             }
         });
 
-        numeroVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        numeroVuelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        idVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        idVuelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jLabel1.setText("Id de vuelo:");
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -234,7 +235,7 @@ public class Aerolinea extends javax.swing.JFrame {
                 .addGap(107, 107, 107)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(numeroVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(idVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(mostrarPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -247,7 +248,7 @@ public class Aerolinea extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(numeroVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(idVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mostrarPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -285,6 +286,11 @@ public class Aerolinea extends javax.swing.JFrame {
 
         insertarVuelo.setText("Insertar vuelo");
         insertarVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        insertarVuelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertarVueloActionPerformed(evt);
+            }
+        });
 
         fechaLlegada.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -425,17 +431,16 @@ public class Aerolinea extends javax.swing.JFrame {
     }//GEN-LAST:event_actualizarTablaPasajerosActionPerformed
 
     private void mostrarPasajerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarPasajerosActionPerformed
-        // TODO add your handling code here:
+        mostrarDatosEnTablaPasajerosVuelos();
     }//GEN-LAST:event_mostrarPasajerosActionPerformed
 
     private void actualizarTablaVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarTablaVuelosActionPerformed
         mostrarDatosEnTablaVuelos();
     }//GEN-LAST:event_actualizarTablaVuelosActionPerformed
 
-    private void insertarVueloActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        formatearFecha();
+    private void insertarVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarVueloActionPerformed
         System.out.println(formatearFecha());
-    }                                             
+    }//GEN-LAST:event_insertarVueloActionPerformed
 
     private String formatearFecha(){
         // Obtener fecha y hora
@@ -503,6 +508,41 @@ public class Aerolinea extends javax.swing.JFrame {
         }
     }
 
+        private void mostrarDatosEnTablaPasajerosVuelos() {
+        try {
+            int numeroVuelo = Integer.parseInt(idVuelo.getText().trim());
+            
+            connDB.cargaDatosPasajerosVuelos(numeroVuelo);
+            ResultSet rs = connDB.getRs();
+
+            DefaultTableModel model = (DefaultTableModel) tablaPasajerosVuelos.getModel();
+            
+            // Borro la tabla porque si no se repiten los datos cada vez que
+            // presiono el botón
+            model.setRowCount(0);
+            
+            // Meto los datos de la base de datos en la tabla
+            while (rs.next()) {
+                String dni = rs.getString("dni");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String tlfn = rs.getString("telefono");
+                String tlfnOpcional = rs.getString("telefono_opcional");
+                String email = rs.getString("email");
+                String[] data = {dni, nombre, apellido, tlfn, tlfnOpcional, email};
+                model.addRow(data);
+            }
+            
+            idVuelo.setText("");
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(
+                null,
+                "¡Has dejado en blanco el id del vuelo!");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -547,6 +587,7 @@ public class Aerolinea extends javax.swing.JFrame {
     private com.github.lgooddatepicker.components.DateTimePicker fechaLlegada;
     private com.github.lgooddatepicker.components.DateTimePicker fechaSalida;
     private javax.swing.JTextField idAvion;
+    private javax.swing.JTextField idVuelo;
     private javax.swing.JPanel infoGeneral;
     private javax.swing.JPanel infoPasajeros;
     private javax.swing.JButton insertarVuelo;
@@ -566,11 +607,10 @@ public class Aerolinea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton mostrarPasajeros;
-    private javax.swing.JTextField numeroVuelo;
     private javax.swing.JTextField origen;
     private javax.swing.JTable tablaPasajeros;
+    private javax.swing.JTable tablaPasajerosVuelos;
     private javax.swing.JTable tablaVuelos;
     // End of variables declaration//GEN-END:variables
 }
