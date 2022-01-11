@@ -193,7 +193,7 @@ public class Aerolinea extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
@@ -208,9 +208,6 @@ public class Aerolinea extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tablaPasajerosVuelos);
-        if (tablaPasajerosVuelos.getColumnModel().getColumnCount() > 0) {
-            tablaPasajerosVuelos.getColumnModel().getColumn(0).setResizable(false);
-        }
 
         mostrarPasajeros.setText("Mostrar pasajeros");
         mostrarPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
