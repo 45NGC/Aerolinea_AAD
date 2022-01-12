@@ -70,5 +70,16 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
+    public void reseteaFumadores(){
+        Statement stmt=null;
+        String query="UPDATE vuelos SET fumadores=0 WHERE fumadores=1";
+        try{
+            stmt=conn.createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 }

@@ -66,6 +66,7 @@ public class Aerolinea extends javax.swing.JFrame {
         cmbDestino = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        nofumador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -392,15 +393,28 @@ public class Aerolinea extends javax.swing.JFrame {
 
         contenedor.addTab("borrarVueloAnterior", jPanel5);
 
+        nofumador.setText("Resetear fumadores");
+        nofumador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nofumadorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(308, 308, 308)
+                .addComponent(nofumador)
+                .addContainerGap(356, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 604, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addComponent(nofumador, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(334, Short.MAX_VALUE))
         );
 
         contenedor.addTab("vuelosFumadores", jPanel6);
@@ -435,6 +449,10 @@ public class Aerolinea extends javax.swing.JFrame {
         insertarDatosVuelo();
         
     }//GEN-LAST:event_insertarVueloActionPerformed
+
+    private void nofumadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nofumadorActionPerformed
+        connDB.reseteaFumadores();
+    }//GEN-LAST:event_nofumadorActionPerformed
 
     private void insertarDatosVuelo(){
         // Este metedo introduce los datos introducidos por el usuario en variables
@@ -646,6 +664,7 @@ public class Aerolinea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton mostrarPasajeros;
+    private javax.swing.JButton nofumador;
     private javax.swing.JTable tablaPasajeros;
     private javax.swing.JTable tablaPasajerosVuelos;
     private javax.swing.JTable tablaVuelos;
