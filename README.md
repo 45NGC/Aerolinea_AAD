@@ -20,7 +20,7 @@ Lo que se debe presentar es:
     
 ## Recursos
 * Lenguaje - [Java](https://www.java.com/es/)
-* Base de Datos - 
+* Base de Datos - [XAMPP](https://www.apachefriends.org/es/index.html)
 * IDE - [NetBeans](https://netbeans.apache.org/download/index.html)
     
 ## Contribuidores
