@@ -2,6 +2,7 @@ package aerolinea;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -51,18 +52,18 @@ public class Aerolinea extends javax.swing.JFrame {
         idAvion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        origen = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        destino = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        distancia = new javax.swing.JTextField();
+        distanciaVuelo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         insertarVuelo = new javax.swing.JButton();
         fechaLlegada = new com.github.lgooddatepicker.components.DateTimePicker();
         fechaSalida = new com.github.lgooddatepicker.components.DateTimePicker();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbFumadores = new javax.swing.JComboBox<>();
+        cmbOrigen = new javax.swing.JComboBox<>();
+        cmbDestino = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
 
@@ -70,8 +71,8 @@ public class Aerolinea extends javax.swing.JFrame {
 
         contenedor.setName(""); // NOI18N
 
-        actualizarTablaVuelos.setText("Actualizar tabla");
         actualizarTablaVuelos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        actualizarTablaVuelos.setText("Actualizar tabla");
         actualizarTablaVuelos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actualizarTablaVuelosActionPerformed(evt);
@@ -155,8 +156,8 @@ public class Aerolinea extends javax.swing.JFrame {
             tablaPasajeros.getColumnModel().getColumn(5).setPreferredWidth(250);
         }
 
-        actualizarTablaPasajeros.setText("Actualizar tabla");
         actualizarTablaPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        actualizarTablaPasajeros.setText("Actualizar tabla");
         actualizarTablaPasajeros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actualizarTablaPasajerosActionPerformed(evt);
@@ -209,8 +210,8 @@ public class Aerolinea extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaPasajerosVuelos);
 
-        mostrarPasajeros.setText("Mostrar pasajeros");
         mostrarPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mostrarPasajeros.setText("Mostrar pasajeros");
         mostrarPasajeros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarPasajerosActionPerformed(evt);
@@ -220,8 +221,8 @@ public class Aerolinea extends javax.swing.JFrame {
         idVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         idVuelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        jLabel1.setText("Id de vuelo:");
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Id de vuelo:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -254,35 +255,31 @@ public class Aerolinea extends javax.swing.JFrame {
 
         idAvion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel2.setText("Id avión");
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Id avión");
 
-        jLabel3.setText("Origen");
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Origen");
 
-        origen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel4.setText("Destino");
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Destino");
 
-        destino.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel5.setText("Fecha salida");
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Fecha salida");
 
-        jLabel6.setText("Fecha llegada");
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Fecha llegada");
 
-        distancia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        distanciaVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel7.setText("Distancia");
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Distancia");
 
-        jLabel8.setText("Fumadores");
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Fumadores");
 
-        insertarVuelo.setText("Insertar vuelo");
         insertarVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        insertarVuelo.setText("Insertar vuelo");
         insertarVuelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertarVueloActionPerformed(evt);
@@ -293,8 +290,12 @@ public class Aerolinea extends javax.swing.JFrame {
 
         fechaSalida.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbFumadores.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbFumadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
+
+        cmbOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Madrid", "Alemania", "Suiza", "Austria", "Polonia", "Berlin", "Oviedo", "Santiago de Chile", "Cancún", " " }));
+
+        cmbDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Madrid", "Alemania", "Suiza", "Austria", "Polonia", "Berlin", "Oviedo", "Santiago de Chile", "Cancún", " " }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -305,30 +306,25 @@ public class Aerolinea extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(destino))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(idAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(32, 32, 32)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(distancia, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(origen))))
-                        .addGap(8, 8, 8)))
-                .addGap(67, 67, 67))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(idAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbFumadores, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(distanciaVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(75, 75, 75))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -357,17 +353,17 @@ public class Aerolinea extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbFumadores, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(distancia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(distanciaVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(cmbOrigen))
                 .addGap(46, 46, 46)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(cmbDestino))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -436,15 +432,59 @@ public class Aerolinea extends javax.swing.JFrame {
     }//GEN-LAST:event_actualizarTablaVuelosActionPerformed
 
     private void insertarVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarVueloActionPerformed
-        System.out.println(formatearFecha());
+        insertarDatosVuelo();
+        
     }//GEN-LAST:event_insertarVueloActionPerformed
 
-    private String formatearFecha(){
-        // Obtener fecha y hora
-        String fecha, hora;
-        fecha = fechaLlegada.getDatePicker().toString();
-        hora = fechaLlegada.getTimePicker().toString();        
+    private void insertarDatosVuelo(){
+        // Este metedo introduce los datos introducidos por el usuario en variables
+        try{
+            int id = Integer.valueOf(idAvion.getText());
+            double distancia = Double.valueOf(distanciaVuelo.getText());
+        }catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(
+                null,
+                "¡ HAS INTRODUCIDO MAL LOS DATOS !");
+        }
         
+        int fumador;
+        if (cmbFumadores.getSelectedItem().toString().equals(true))
+            fumador=1;
+        if(cmbFumadores.getSelectedItem().toString().equals(false))
+            fumador=0;
+        
+        // Obtenemos los valores de tipo STRING
+        String origen = cmbOrigen.getSelectedItem().toString();
+        String destino = cmbDestino.getSelectedItem().toString();
+        String fechaLlegada = formatearFecha(0);
+        String fechaSalida = formatearFecha(1);
+        
+        // Controlamos que el usuario no meta un origen y destino iguales
+        boolean error;
+        if(origen.equals(destino))
+            error=true;
+        else{
+            error=false;
+        }
+            
+    }
+    
+    private String formatearFecha(int opcion){
+        // Este metodo pasa los datos de DatePicker y TimePicker a String
+        String fecha="", hora="";
+        if(opcion == 0){
+            
+            // Obtener fecha y hora LLEGADA
+            fecha = fechaLlegada.getDatePicker().toString();
+            hora = fechaLlegada.getTimePicker().toString();      
+            
+        }else if(opcion == 1){
+            
+            // Obtener fecha y hora SALIDA
+            fecha = fechaLlegada.getDatePicker().toString();
+            hora = fechaLlegada.getTimePicker().toString();
+            
+        } 
         return fecha+" "+hora;
     }
     
@@ -534,7 +574,7 @@ public class Aerolinea extends javax.swing.JFrame {
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(
                 null,
-                "¡Has dejado en blanco el id del vuelo!");
+               "¡ HAS INTRODUCIDO MAL LOS DATOS !");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -578,9 +618,11 @@ public class Aerolinea extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizarTablaPasajeros;
     private javax.swing.JButton actualizarTablaVuelos;
+    private javax.swing.JComboBox<String> cmbDestino;
+    private javax.swing.JComboBox<String> cmbFumadores;
+    private javax.swing.JComboBox<String> cmbOrigen;
     private javax.swing.JTabbedPane contenedor;
-    private javax.swing.JTextField destino;
-    private javax.swing.JTextField distancia;
+    private javax.swing.JTextField distanciaVuelo;
     private com.github.lgooddatepicker.components.DateTimePicker fechaLlegada;
     private com.github.lgooddatepicker.components.DateTimePicker fechaSalida;
     private javax.swing.JTextField idAvion;
@@ -588,7 +630,6 @@ public class Aerolinea extends javax.swing.JFrame {
     private javax.swing.JPanel infoGeneral;
     private javax.swing.JPanel infoPasajeros;
     private javax.swing.JButton insertarVuelo;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -605,7 +646,6 @@ public class Aerolinea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton mostrarPasajeros;
-    private javax.swing.JTextField origen;
     private javax.swing.JTable tablaPasajeros;
     private javax.swing.JTable tablaPasajerosVuelos;
     private javax.swing.JTable tablaVuelos;
