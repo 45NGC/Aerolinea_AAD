@@ -456,33 +456,44 @@ public class Aerolinea extends javax.swing.JFrame {
 
     private void insertarDatosVuelo(){
         // Este metedo introduce los datos introducidos por el usuario en variables
-        try{
+        
+        // Obtenemos los valores de tipo INT
+        try {
             int id = Integer.valueOf(idAvion.getText());
-            double distancia = Double.valueOf(distanciaVuelo.getText());
-        }catch(NumberFormatException nfe){
+            float distancia = Float.valueOf(distanciaVuelo.getText());
+
+            int fumador;
+            if (cmbFumadores.getSelectedItem().toString().equals(true)) {
+                fumador = 1;
+            }
+            if (cmbFumadores.getSelectedItem().toString().equals(false)) {
+                fumador = 0;
+            }
+
+            // Obtenemos los valores de tipo STRING
+            String origen = cmbOrigen.getSelectedItem().toString();
+            String destino = cmbDestino.getSelectedItem().toString();
+            String fechaLlegada = formatearFecha(0);
+            String fechaSalida = formatearFecha(1);
+
+            // Controlamos que el usuario no meta un origen y destino iguales
+            boolean error;
+            if (origen.equals(destino)) {
+                error = true;
+            } else {
+                error = false;
+            }
+
+            // Introducimos los datos recopilados en la base de datos
+            try {
+                connDB.insertarVuelo(id, origen, destino, fechaSalida, fechaLlegada, distancia, fumador);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(
-                null,
-                "¡ HAS INTRODUCIDO MAL LOS DATOS !");
-        }
-        
-        int fumador;
-        if (cmbFumadores.getSelectedItem().toString().equals(true))
-            fumador=1;
-        if(cmbFumadores.getSelectedItem().toString().equals(false))
-            fumador=0;
-        
-        // Obtenemos los valores de tipo STRING
-        String origen = cmbOrigen.getSelectedItem().toString();
-        String destino = cmbDestino.getSelectedItem().toString();
-        String fechaLlegada = formatearFecha(0);
-        String fechaSalida = formatearFecha(1);
-        
-        // Controlamos que el usuario no meta un origen y destino iguales
-        boolean error;
-        if(origen.equals(destino))
-            error=true;
-        else{
-            error=false;
+                    null,
+                    "¡ HAS INTRODUCIDO MAL LOS DATOS !");
         }
             
     }

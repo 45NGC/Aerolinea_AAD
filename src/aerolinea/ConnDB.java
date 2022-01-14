@@ -81,5 +81,16 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
+    public void insertarVuelo(int idAvion, String origen, String destino, String fechaSalida, String fechaLlegada,float distancia, int fumadores ){
+        Statement stmt=null;
+        String query="INSERT INTO vuelos VALUES (null, idAvion, origen, destino, fechaSalida, fechaLlegada, distancia, fumadores, 0);";
+        try{
+            stmt=conn.createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
