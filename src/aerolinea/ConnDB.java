@@ -109,5 +109,21 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void borrarUltimoVuelo() {
+        Statement stmt = null;
+        String guardarUltimoVuelo = "SELECT id FROM vuelos ORDER BY id DESC LIMIT 1";
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(guardarUltimoVuelo);
+            rs.next();
+            int id = Integer.parseInt(rs.getString("id"));
+            String borrarUltimoVuelo = "DELETE FROM vuelos WHERE id = " + id;
+            stmt.executeUpdate(borrarUltimoVuelo);
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }

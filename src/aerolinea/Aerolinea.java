@@ -63,6 +63,7 @@ public class Aerolinea extends javax.swing.JFrame {
         idAvionT = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        borrarUltimoVuelo = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         nofumador = new javax.swing.JButton();
 
@@ -390,15 +391,29 @@ public class Aerolinea extends javax.swing.JFrame {
 
         contenedor.addTab("insertarVuelo", jPanel4);
 
+        borrarUltimoVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        borrarUltimoVuelo.setText("Borrar ultimo vuelo");
+        borrarUltimoVuelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarUltimoVueloActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addComponent(borrarUltimoVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 722, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addComponent(borrarUltimoVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(409, Short.MAX_VALUE))
         );
 
         contenedor.addTab("borrarVueloAnterior", jPanel5);
@@ -457,12 +472,15 @@ public class Aerolinea extends javax.swing.JFrame {
 
     private void insertarVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarVueloActionPerformed
         insertarDatosVuelo();
-
     }//GEN-LAST:event_insertarVueloActionPerformed
 
     private void nofumadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nofumadorActionPerformed
         connDB.reseteaFumadores();
     }//GEN-LAST:event_nofumadorActionPerformed
+
+    private void borrarUltimoVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarUltimoVueloActionPerformed
+        connDB.borrarUltimoVuelo();
+    }//GEN-LAST:event_borrarUltimoVueloActionPerformed
 
     // todo faltan comprobar las fechas y refactorizar el metodo
     private void insertarDatosVuelo() {
@@ -477,7 +495,7 @@ public class Aerolinea extends javax.swing.JFrame {
             int fumadores = (cmbFumadores.getSelectedIndex() == 0) ? 0 : 1;
 
             // Controlamos que el usuario no meta un origen y destino iguales
-            boolean errorOrigenDestino = origen.equals(destino) ? true : false;
+            boolean errorOrigenDestino = origen.equals(destino);
             connDB.comprobarAvionDisponible(idAvion);
             ResultSet rs = connDB.getRs();
             rs.next();
@@ -609,7 +627,7 @@ public class Aerolinea extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-
+    
     /**
      * @param args the command line arguments
      */
@@ -648,6 +666,7 @@ public class Aerolinea extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizarTablaPasajeros;
     private javax.swing.JButton actualizarTablaVuelos;
+    private javax.swing.JButton borrarUltimoVuelo;
     private javax.swing.JComboBox<String> cmbDestino;
     private javax.swing.JComboBox<String> cmbFumadores;
     private javax.swing.JComboBox<String> cmbOrigen;
