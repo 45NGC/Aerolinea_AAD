@@ -7,8 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author angel
+ * @author Ángel, Nicolás, Rocio
  */
 public class Aerolinea extends javax.swing.JFrame {
 
@@ -482,60 +481,9 @@ public class Aerolinea extends javax.swing.JFrame {
         connDB.borrarUltimoVuelo();
     }//GEN-LAST:event_borrarUltimoVueloActionPerformed
 
-    // todo faltan comprobar las fechas y refactorizar el metodo
-    private void insertarDatosVuelo() {
-        // Este metedo introduce los datos introducidos por el usuario en variables
-        try {
-            int idAvion = Integer.valueOf(idAvionT.getText());
-            String origen = cmbOrigen.getSelectedItem().toString();
-            String destino = cmbDestino.getSelectedItem().toString();
-            String fechaSalida = formatearFecha(this.fechaSalida);
-            String fechaLlegada = formatearFecha(this.fechaLlegada);
-            float distanciaVuelo = Float.valueOf(distanciaVueloT.getText());
-            int fumadores = (cmbFumadores.getSelectedIndex() == 0) ? 0 : 1;
-
-            // Controlamos que el usuario no meta un origen y destino iguales
-            boolean errorOrigenDestino = origen.equals(destino);
-            connDB.comprobarAvionDisponible(idAvion);
-            ResultSet rs = connDB.getRs();
-            rs.next();
-            int disponible = Integer.valueOf(rs.getString("disponible"));
-
-            if (errorOrigenDestino) {
-                mostrarMensajeAviso("¡ HAS INTRODUCIDO MAL LOS DATOS !");
-            } else {
-                if (disponible == 0) {
-                    mostrarMensajeAviso("¡ ESE AVION NO ESTA DISPONIBLE !");
-                } else {
-                    idAvionT.setText("");
-                    distanciaVueloT.setText("");
-                    cmbFumadores.setSelectedIndex(0);
-                    cmbOrigen.setSelectedIndex(0);
-                    cmbDestino.setSelectedIndex(0);
-                    mostrarMensajeAviso("¡ VUELO AGREGADO CON EXITO !");
-                    connDB.insertarVuelo(idAvion, origen, destino, fechaSalida, fechaLlegada, distanciaVuelo, fumadores);
-                }
-            }
-        } catch (NumberFormatException nfe) {
-            mostrarMensajeAviso("¡ HAS INTRODUCIDO MAL LOS DATOS !");
-        } catch (SQLException ex) {
-            mostrarMensajeAviso("¡ ESE AVIÓN NO EXISTE !");
-        }
-    }
-
-    private void mostrarMensajeAviso(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
-
-    private String formatearFecha(DateTimePicker dateTimePicker) {
-        // Este metodo pasa los datos de DatePicker y TimePicker a String
-        // Obtener fecha y hora LLEGADA
-        String fecha = dateTimePicker.getDatePicker().toString();
-        String hora = dateTimePicker.getTimePicker().toString() + ":00";
-
-        return fecha + " " + hora;
-    }
-
+    /**
+     * Muestra los datos de la base de datos en la tabla de infoVuelos
+     */
     private void mostrarDatosEnTablaVuelos() {
         try {
             connDB.cargaDatosVuelos();
@@ -566,6 +514,9 @@ public class Aerolinea extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Muestra los datos de la base de datos en la tabla de infoPasajeros
+     */
     private void mostrarDatosEnTablaPasajeros() {
         try {
             connDB.cargaDatosPasajeros();
@@ -593,6 +544,9 @@ public class Aerolinea extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Muestra los datos de la base de datos en la tabla de infoPasajerosVuelos
+     */
     private void mostrarDatosEnTablaPasajerosVuelos() {
         try {
             int numeroVuelo = Integer.parseInt(idVuelo.getText().trim());
@@ -620,14 +574,76 @@ public class Aerolinea extends javax.swing.JFrame {
 
             idVuelo.setText("");
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "¡ HAS INTRODUCIDO MAL LOS DATOS !");
+            mostrarMensajeAviso("¡ HAS INTRODUCIDO MAL LOS DATOS !");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
     
+    /**
+     * Agrega un vuelo en la base de datos
+     */
+    private void insertarDatosVuelo() {
+        try {
+            int idAvion = Integer.valueOf(idAvionT.getText());
+            String origen = cmbOrigen.getSelectedItem().toString();
+            String destino = cmbDestino.getSelectedItem().toString();
+            String fechaSalida = formatearFecha(this.fechaSalida);
+            String fechaLlegada = formatearFecha(this.fechaLlegada);
+            float distanciaVuelo = Float.valueOf(distanciaVueloT.getText());
+            int fumadores = (cmbFumadores.getSelectedIndex() == 0) ? 0 : 1;
+            boolean errorOrigenDestino = origen.equals(destino);
+            
+            connDB.comprobarAvionDisponible(idAvion);
+            ResultSet rs = connDB.getRs();
+            rs.next();
+            int disponible = Integer.valueOf(rs.getString("disponible"));
+
+            if (errorOrigenDestino) {
+                mostrarMensajeAviso("¡ HAS INTRODUCIDO MAL LOS DATOS !");
+            } else {
+                if (disponible == 0) {
+                    mostrarMensajeAviso("¡ ESE AVION NO ESTA DISPONIBLE !");
+                } else {
+                    idAvionT.setText("");
+                    distanciaVueloT.setText("");
+                    cmbFumadores.setSelectedIndex(0);
+                    cmbOrigen.setSelectedIndex(0);
+                    cmbDestino.setSelectedIndex(0);
+                    mostrarMensajeAviso("¡ VUELO AGREGADO CON EXITO !");
+                    connDB.insertarVuelo(idAvion, origen, destino, fechaSalida, fechaLlegada, distanciaVuelo, fumadores);
+                }
+            }
+        } catch (NumberFormatException nfe) {
+            mostrarMensajeAviso("¡ HAS INTRODUCIDO MAL LOS DATOS !");
+        } catch (SQLException ex) {
+            mostrarMensajeAviso("¡ ESE AVIÓN NO EXISTE !");
+        }
+    }
+
+    /**
+     * Muestra un mensaje de avio al usuario
+     * 
+     * @param mensaje Descripción del mensaje 
+     */
+    private void mostrarMensajeAviso(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+
+    /**
+     * Formatea la fecha dada por el JDateTimePicker en formato dateTime de
+     * mysql
+     * 
+     * @param dateTimePicker
+     * @return String La fecha formateada del dateTimePicker
+     */
+    private String formatearFecha(DateTimePicker dateTimePicker) {
+        String fecha = dateTimePicker.getDatePicker().toString();
+        String hora = dateTimePicker.getTimePicker().toString() + ":00";
+
+        return fecha + " " + hora;
+    }
+
     /**
      * @param args the command line arguments
      */
