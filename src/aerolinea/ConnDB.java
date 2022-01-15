@@ -59,10 +59,10 @@ public class ConnDB {
 
     public void cargaDatosPasajerosVuelos(int idVuelo) {
         Statement stmt = null;
-        String query = "SELECT * FROM pasajeros, billetes, vuelos " +
-                       "WHERE pasajeros.dni = billetes.dni_pasajero " +
-                       "AND billetes.id_vuelo = vuelos.id " +
-                       "AND vuelos.id = " + idVuelo;
+        String query = "SELECT * FROM pasajeros, billetes, vuelos "
+                + "WHERE pasajeros.dni = billetes.dni_pasajero "
+                + "AND billetes.id_vuelo = vuelos.id "
+                + "AND vuelos.id = " + idVuelo;
         try {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
@@ -70,44 +70,42 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
-    public void reseteaFumadores(){
-        Statement stmt=null;
-        String query="UPDATE vuelos SET fumadores=0 WHERE fumadores=1";
-        try{
-            stmt=conn.createStatement();
+
+    public void reseteaFumadores() {
+        Statement stmt = null;
+        String query = "UPDATE vuelos SET fumadores=0 WHERE fumadores=1";
+        try {
+            stmt = conn.createStatement();
             stmt.executeUpdate(query);
             stmt.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    public void comprobarVuelosDuplicados(int id, int idAvion, String origen, String destino, String fechaSalida, String fechaLlegada,float distancia, int fumadores ){
-        Statement stmt=null;
-        String query= "SELECT * FROM vuelos WHERE"+
-                      "vuelos.id = id"+
-                      "vuelos.id_avion = idAvion"+
-                      "vuelos.origen = origen"+
-                      "vuelos.destino = destino"+
-                      "vuelos.fecha_salida = fechaSalida"+
-                      "vuelos.fecha_llegada = fechaLlegada"+
-                      "vuelos.distancia = distancia"+
-                      "vuelos.fumadores = distancia";
-        try{
-            stmt=conn.createStatement();
-            stmt.executeUpdate(query);
-            stmt.close();
-        }catch(SQLException e){
+
+    
+    public void comprobarAvionDisponible(int id){
+        Statement stmt = null;
+        String query = "SELECT disponible FROM aviones WHERE id = " + id;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    public void insertarVuelo(int id, int idAvion, String origen, String destino, String fechaSalida, String fechaLlegada,float distancia, int fumadores ){
-        Statement stmt=null;
-        String query="INSERT INTO vuelos VALUES (id, idAvion, origen, destino, fechaSalida, fechaLlegada, distancia, fumadores, 0);";
-        try{
-            stmt=conn.createStatement();
+
+    public void insertarVuelo(int idAvion, String origen, String destino, String fechaSalida, String fechaLlegada, float distancia, int fumadores) {
+        Statement stmt = null;
+        String query = "INSERT INTO vuelos "
+                     + "VALUES (null, " + idAvion + ", '" + origen + "', '"
+                     + destino + "', '" + fechaSalida + "', '" + fechaLlegada
+                     + "', " + distancia + ", " + fumadores + ", 1);";
+        try {
+            stmt = conn.createStatement();
             stmt.executeUpdate(query);
             stmt.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }

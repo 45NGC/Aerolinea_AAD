@@ -2,9 +2,7 @@ package aerolinea;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.InputMismatchException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.github.lgooddatepicker.components.DateTimePicker;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,8 +47,6 @@ public class Aerolinea extends javax.swing.JFrame {
         idVuelo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        idT = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -59,8 +55,8 @@ public class Aerolinea extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         insertarVuelo = new javax.swing.JButton();
-        fechaLlegada = new com.github.lgooddatepicker.components.DateTimePicker();
         fechaSalida = new com.github.lgooddatepicker.components.DateTimePicker();
+        fechaLlegada = new com.github.lgooddatepicker.components.DateTimePicker();
         cmbFumadores = new javax.swing.JComboBox<>();
         cmbOrigen = new javax.swing.JComboBox<>();
         cmbDestino = new javax.swing.JComboBox<>();
@@ -74,8 +70,8 @@ public class Aerolinea extends javax.swing.JFrame {
 
         contenedor.setName(""); // NOI18N
 
-        actualizarTablaVuelos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         actualizarTablaVuelos.setText("Actualizar tabla");
+        actualizarTablaVuelos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         actualizarTablaVuelos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actualizarTablaVuelosActionPerformed(evt);
@@ -87,7 +83,7 @@ public class Aerolinea extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Id avion", "Origen", "Destino", "Fecha salida", "Fecha llegada", "Distancia", "Fumadores", "Activo"
+                "Id vuelo", "Id avion", "Origen", "Destino", "Fecha salida", "Fecha llegada", "Distancia", "Fumadores", "Activo"
             }
         ) {
             Class[] types = new Class [] {
@@ -106,6 +102,24 @@ public class Aerolinea extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(tablaVuelos);
+        if (tablaVuelos.getColumnModel().getColumnCount() > 0) {
+            tablaVuelos.getColumnModel().getColumn(0).setResizable(false);
+            tablaVuelos.getColumnModel().getColumn(0).setPreferredWidth(45);
+            tablaVuelos.getColumnModel().getColumn(1).setResizable(false);
+            tablaVuelos.getColumnModel().getColumn(1).setPreferredWidth(45);
+            tablaVuelos.getColumnModel().getColumn(2).setResizable(false);
+            tablaVuelos.getColumnModel().getColumn(2).setPreferredWidth(90);
+            tablaVuelos.getColumnModel().getColumn(4).setResizable(false);
+            tablaVuelos.getColumnModel().getColumn(4).setPreferredWidth(110);
+            tablaVuelos.getColumnModel().getColumn(5).setResizable(false);
+            tablaVuelos.getColumnModel().getColumn(5).setPreferredWidth(110);
+            tablaVuelos.getColumnModel().getColumn(6).setResizable(false);
+            tablaVuelos.getColumnModel().getColumn(6).setPreferredWidth(60);
+            tablaVuelos.getColumnModel().getColumn(7).setResizable(false);
+            tablaVuelos.getColumnModel().getColumn(7).setPreferredWidth(45);
+            tablaVuelos.getColumnModel().getColumn(8).setResizable(false);
+            tablaVuelos.getColumnModel().getColumn(8).setPreferredWidth(45);
+        }
 
         javax.swing.GroupLayout infoGeneralLayout = new javax.swing.GroupLayout(infoGeneral);
         infoGeneral.setLayout(infoGeneralLayout);
@@ -159,8 +173,8 @@ public class Aerolinea extends javax.swing.JFrame {
             tablaPasajeros.getColumnModel().getColumn(5).setPreferredWidth(250);
         }
 
-        actualizarTablaPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         actualizarTablaPasajeros.setText("Actualizar tabla");
+        actualizarTablaPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         actualizarTablaPasajeros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actualizarTablaPasajerosActionPerformed(evt);
@@ -213,19 +227,19 @@ public class Aerolinea extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaPasajerosVuelos);
 
-        mostrarPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mostrarPasajeros.setText("Mostrar pasajeros");
+        mostrarPasajeros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mostrarPasajeros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarPasajerosActionPerformed(evt);
             }
         });
 
-        idVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         idVuelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        idVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Id de vuelo:");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -256,45 +270,40 @@ public class Aerolinea extends javax.swing.JFrame {
 
         contenedor.addTab("infoPasajerosVuelo", jPanel3);
 
-        idT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Id");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Origen");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Destino");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        jLabel5.setText("Fecha llegada");
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Fecha salida");
 
+        jLabel6.setText("Fecha Salida");
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Fecha llegada");
 
         distanciaVueloT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Distancia");
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Fumadores");
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        insertarVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         insertarVuelo.setText("Insertar vuelo");
+        insertarVuelo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         insertarVuelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertarVueloActionPerformed(evt);
             }
         });
 
-        fechaLlegada.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
         fechaSalida.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        fechaLlegada.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        cmbFumadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
         cmbFumadores.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cmbFumadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
 
         cmbOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Madrid", "Alemania", "Suiza", "Austria", "Polonia", "Berlin", "Oviedo", "Santiago de Chile", "Cancún", " " }));
 
@@ -302,8 +311,8 @@ public class Aerolinea extends javax.swing.JFrame {
 
         idAvionT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Id avión");
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -312,47 +321,35 @@ public class Aerolinea extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(74, 74, 74)
+                        .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fechaLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap(45, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(idAvionT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(distanciaVueloT, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbFumadores, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(idT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(idAvionT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(243, 243, 243)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(distanciaVueloT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbFumadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(292, 292, 292)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cmbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(fechaLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(292, 292, 292)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -362,41 +359,33 @@ public class Aerolinea extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(87, 87, 87)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idAvionT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbFumadores, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(distanciaVueloT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idAvionT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbFumadores, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(96, 96, 96)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(71, 71, 71)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(72, 72, 72)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fechaLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                    .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fechaLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(84, 84, 84)
                 .addComponent(insertarVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         contenedor.addTab("insertarVuelo", jPanel4);
@@ -468,89 +457,78 @@ public class Aerolinea extends javax.swing.JFrame {
 
     private void insertarVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarVueloActionPerformed
         insertarDatosVuelo();
-        
+
     }//GEN-LAST:event_insertarVueloActionPerformed
 
     private void nofumadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nofumadorActionPerformed
         connDB.reseteaFumadores();
     }//GEN-LAST:event_nofumadorActionPerformed
 
-    private void insertarDatosVuelo(){
+    // todo faltan comprobar las fechas y refactorizar el metodo
+    private void insertarDatosVuelo() {
         // Este metedo introduce los datos introducidos por el usuario en variables
-        
-        // Obtenemos los valores de tipo INT
         try {
-            int id = Integer.valueOf(idT.getText());
             int idAvion = Integer.valueOf(idAvionT.getText());
-            float distanciaVuelo = Float.valueOf(distanciaVueloT.getText());
-
-            int fumador=0;
-            if (cmbFumadores.getSelectedItem().toString().equals(true)) {
-                fumador = 1;
-            }
-            if (cmbFumadores.getSelectedItem().toString().equals(false)) {
-                fumador = 0;
-            }
-
-            // Obtenemos los valores de tipo STRING
             String origen = cmbOrigen.getSelectedItem().toString();
             String destino = cmbDestino.getSelectedItem().toString();
-            String fechaLlegada = formatearFecha(0);
-            String fechaSalida = formatearFecha(1);
+            String fechaSalida = formatearFecha(this.fechaSalida);
+            String fechaLlegada = formatearFecha(this.fechaLlegada);
+            float distanciaVuelo = Float.valueOf(distanciaVueloT.getText());
+            int fumadores = (cmbFumadores.getSelectedIndex() == 0) ? 0 : 1;
 
             // Controlamos que el usuario no meta un origen y destino iguales
-            boolean error;
-            if (origen.equals(destino)) {
-                error = true;
-            } else {
-                error = false;
-            }
-            
-            // Comprobamos que si los datos introducidos por el usuario existen dentro de la base de datos
-            // En caso de que dichos elementos ya existan dentro de la base de datos se le indicara al usuario
-            connDB.comprobarVuelosDuplicados(id, idAvion, origen, destino, fechaSalida, fechaLlegada, distanciaVuelo, fumador);
+            boolean errorOrigenDestino = origen.equals(destino) ? true : false;
+            connDB.comprobarAvionDisponible(idAvion);
+            ResultSet rs = connDB.getRs();
+            rs.next();
+            int disponible = Integer.valueOf(rs.getString("disponible"));
 
-            // Introducimos los datos recopilados en la base de datos
-            connDB.insertarVuelo(id, idAvion, origen, destino, fechaSalida, fechaLlegada, distanciaVuelo, fumador);
-          
+            if (errorOrigenDestino) {
+                mostrarMensajeAviso("¡ HAS INTRODUCIDO MAL LOS DATOS !");
+            } else {
+                if (disponible == 0) {
+                    mostrarMensajeAviso("¡ ESE AVION NO ESTA DISPONIBLE !");
+                } else {
+                    idAvionT.setText("");
+                    distanciaVueloT.setText("");
+                    cmbFumadores.setSelectedIndex(0);
+                    cmbOrigen.setSelectedIndex(0);
+                    cmbDestino.setSelectedIndex(0);
+                    mostrarMensajeAviso("¡ VUELO AGREGADO CON EXITO !");
+                    connDB.insertarVuelo(idAvion, origen, destino, fechaSalida, fechaLlegada, distanciaVuelo, fumadores);
+                }
+            }
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "¡ HAS INTRODUCIDO MAL LOS DATOS !");
+            mostrarMensajeAviso("¡ HAS INTRODUCIDO MAL LOS DATOS !");
+        } catch (SQLException ex) {
+            mostrarMensajeAviso("¡ ESE AVIÓN NO EXISTE !");
         }
-            
     }
-    
-    private String formatearFecha(int opcion){
+
+    private void mostrarMensajeAviso(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+
+    private String formatearFecha(DateTimePicker dateTimePicker) {
         // Este metodo pasa los datos de DatePicker y TimePicker a String
-        String fecha="", hora="";
-        if(opcion == 0){
-            
-            // Obtener fecha y hora LLEGADA
-            fecha = fechaLlegada.getDatePicker().toString();
-            hora = fechaLlegada.getTimePicker().toString();      
-            
-        }else if(opcion == 1){
-            
-            // Obtener fecha y hora SALIDA
-            fecha = fechaLlegada.getDatePicker().toString();
-            hora = fechaLlegada.getTimePicker().toString();
-            
-        } 
-        return fecha+" "+hora;
+        // Obtener fecha y hora LLEGADA
+        String fecha = dateTimePicker.getDatePicker().toString();
+        String hora = dateTimePicker.getTimePicker().toString() + ":00";
+
+        return fecha + " " + hora;
     }
-    
+
     private void mostrarDatosEnTablaVuelos() {
         try {
             connDB.cargaDatosVuelos();
             ResultSet rs = connDB.getRs();
 
             DefaultTableModel model = (DefaultTableModel) tablaVuelos.getModel();
-            
+
             // Borro la tabla porque si no se repiten los datos cada vez que
             // presiono el botón
             model.setRowCount(0);
-            
+
             // Meto los datos de la base de datos en la tabla
             while (rs.next()) {
                 String id = rs.getString("id");
@@ -569,18 +547,18 @@ public class Aerolinea extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
+
     private void mostrarDatosEnTablaPasajeros() {
         try {
             connDB.cargaDatosPasajeros();
             ResultSet rs = connDB.getRs();
 
             DefaultTableModel model = (DefaultTableModel) tablaPasajeros.getModel();
-            
+
             // Borro la tabla porque si no se repiten los datos cada vez que
             // presiono el botón
             model.setRowCount(0);
-            
+
             // Meto los datos de la base de datos en la tabla
             while (rs.next()) {
                 String dni = rs.getString("dni");
@@ -597,19 +575,19 @@ public class Aerolinea extends javax.swing.JFrame {
         }
     }
 
-        private void mostrarDatosEnTablaPasajerosVuelos() {
+    private void mostrarDatosEnTablaPasajerosVuelos() {
         try {
             int numeroVuelo = Integer.parseInt(idVuelo.getText().trim());
-            
+
             connDB.cargaDatosPasajerosVuelos(numeroVuelo);
             ResultSet rs = connDB.getRs();
 
             DefaultTableModel model = (DefaultTableModel) tablaPasajerosVuelos.getModel();
-            
+
             // Borro la tabla porque si no se repiten los datos cada vez que
             // presiono el botón
             model.setRowCount(0);
-            
+
             // Meto los datos de la base de datos en la tabla
             while (rs.next()) {
                 String dni = rs.getString("dni");
@@ -621,17 +599,17 @@ public class Aerolinea extends javax.swing.JFrame {
                 String[] data = {dni, nombre, apellido, tlfn, tlfnOpcional, email};
                 model.addRow(data);
             }
-            
+
             idVuelo.setText("");
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(
-                null,
-               "¡ HAS INTRODUCIDO MAL LOS DATOS !");
+                    null,
+                    "¡ HAS INTRODUCIDO MAL LOS DATOS !");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -678,13 +656,11 @@ public class Aerolinea extends javax.swing.JFrame {
     private com.github.lgooddatepicker.components.DateTimePicker fechaLlegada;
     private com.github.lgooddatepicker.components.DateTimePicker fechaSalida;
     private javax.swing.JTextField idAvionT;
-    private javax.swing.JTextField idT;
     private javax.swing.JTextField idVuelo;
     private javax.swing.JPanel infoGeneral;
     private javax.swing.JPanel infoPasajeros;
     private javax.swing.JButton insertarVuelo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
