@@ -12,13 +12,13 @@ import javax.swing.table.DefaultTableModel;
 public class Aerolinea extends javax.swing.JFrame {
 
     private ConnDB connDB;
-
+    
     /**
      * Creates new form Aerolinea
      */
     public Aerolinea() {
         initComponents();
-        connDB = new ConnDB();
+        connDB = ConnDB.getInstance();
     }
 
     /**

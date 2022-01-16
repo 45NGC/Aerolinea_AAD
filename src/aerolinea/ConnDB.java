@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class ConnDB {
 
+    private static ConnDB instanciaUnica;
     private Connection conn; // Connexión con la base de datos
     private ResultSet rs;    // Guardar los registros de una consulta
     // NOTA: El objeto Statement se utiliza para ejecutar comandos SQL
@@ -19,7 +20,7 @@ public class ConnDB {
     /**
      * Constructor por defecto que se conecta a una base de datos especifica
      */
-    public ConnDB() {
+    private ConnDB() {
         try {
             conn = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/aerolinea",
@@ -30,7 +31,19 @@ public class ConnDB {
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
+    /**
+     * Si es null crea un objeto connDB
+     * 
+     * @return ConnDb 
+     */
+    public static ConnDB getInstance(){
+        if (instanciaUnica==null){
+            instanciaUnica=new ConnDB();
+        }
+        
+        return instanciaUnica;
+    }
     /**
      * Devuelve los registros guardados en el resultSet
      * 
@@ -177,5 +190,4 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
-
 }
